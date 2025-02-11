@@ -1,0 +1,15 @@
+﻿@model MenuItemModel
+
+@{
+    ViewData["Title"] = "Șterge produsul";
+}
+
+<h2>Ești sigur că vrei să ștergi acest produs?</h2>
+<h4>@Model.Name</h4>
+
+<form method="post">
+    <input type="hidden" asp-for="IdMenuItem" />
+
+    <button type="submit" class="btn btn-danger">Șterge</button>
+    <a asp-action="Index" class="btn btn-secondary">Anulează</a>
+</form>

@@ -1,0 +1,127 @@
+:root {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+    --btn-primary-bg: #0d6efd;
+    --btn-primary-hover: #0a58ca;
+    --navbar-bg: #212529;
+    --table-header-bg: #343a40;
+    --table-row-bg: #1e1e1e;
+    --input-bg: #222;
+    --input-border: #555;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+    .navbar a {
+        color: var(--text-color) !important;
+    }
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+    .card:hover {
+        transform: scale(1.02); 
+    }
+
+.card-body {
+    padding: 20px;
+}
+
+.card h5 {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.card p {
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.status-pending {
+    background-color: orange;
+    color: black;
+}
+
+.status-approved {
+    background-color: green;
+    color: white;
+}
+
+
+.table {
+    color: var(--text-color);
+}
+
+    .table th {
+        background-color: var(--table-header-bg);
+        color: var(--text-color);
+    }
+
+    .table tbody tr {
+        background-color: var(--table-row-bg);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    border-color: var(--btn-primary-bg);
+}
+
+    .btn-primary:hover {
+        background-color: var(--btn-primary-hover);
+        border-color: var(--btn-primary-hover);
+    }
+
+.input-group, .form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+}
+
+    .form-control:focus {
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        border-color: var(--btn-primary-bg);
+        box-shadow: none;
+    }
+
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-menu {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+    .dropdown-item:hover {
+        background-color: var(--table-header-bg);
+    }

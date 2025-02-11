@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Bine ai venit!";
+}
+
+<div class="d-flex flex-column justify-content-center align-items-center text-center vh-100">
+    <h1 class="mb-3">Bine ai venit la <span class="text-primary">RezervariRestaurant</span>!</h1>
+    <p class="lead text-light">Autentifică-te pentru a face o rezervare și a comanda din meniul nostru!</p>
+
+    <div class="mt-3">
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg me-2">Login</a>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-secondary btn-lg">Înregistrează-te</a>
+    </div>
+</div>

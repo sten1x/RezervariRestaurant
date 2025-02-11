@@ -1,0 +1,76 @@
+﻿@using RezervariRestaurant.Models
+@model ReservationEditViewModel
+
+@{
+    ViewData["Title"] = "Editează Rezervarea";
+}
+
+<h2 class="mb-4">Editează Rezervarea</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Reservation.IdReservation" />
+
+    <div class="mb-3">
+        <label class="form-label">Data și Ora Rezervării</label>
+        <input asp-for="Reservation.ReservationDate" class="form-control" type="datetime-local" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Număr persoane</label>
+        <input asp-for="Reservation.Guests" class="form-control" type="number" min="1" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvează</button>
+</form>
+
+<hr class="my-4" />
+
+<h3>Comanda asociată</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produs</th>
+            <th>Cantitate</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.OrderDetails)
+        {
+            <tr>
+                <td>@Model.MenuItems.FirstOrDefault(m => m.IdMenuItem == detail.IdMenuItem)?.Name</td>
+                <td>@detail.Quantity</td>
+                <td>
+                    <form method="post" asp-action="RemoveOrderDetail">
+                        <input type="hidden" name="orderDetailId" value="@detail.IdOrderDetail" />
+                        <button type="submit" class="btn btn-danger">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Adaugă un produs</h4>
+
+<form method="post" asp-action="AddMenuItemToOrder">
+    <input type="hidden" name="reservationId" value="@Model.Reservation.IdReservation" />
+
+    <div class="mb-3">
+        <label class="form-label">Alege un produs</label>
+        <select name="menuItemId" class="form-control">
+            @foreach (var item in Model.MenuItems)
+            {
+                <option value="@item.IdMenuItem">@item.Name - @item.Price lei</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cantitate</label>
+        <input type="number" name="quantity" min="1" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Adaugă în comandă</button>
+</form>

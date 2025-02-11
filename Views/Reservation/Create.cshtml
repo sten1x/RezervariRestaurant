@@ -1,0 +1,23 @@
+﻿@model RezervariRestaurant.Models.ReservationModel
+
+@{
+    ViewData["Title"] = "Creează o Rezervare";
+}
+
+<h2 class="mb-4">Creează o Rezervare</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label for="reservationDate">Data și Ora Rezervării</label>
+        <input type="datetime-local" id="reservationDate" name="reservationDate"
+               class="form-control" min="{{ DateTime.Now.ToString(" yyyy-MM-ddTHH:mm") }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Număr persoane</label>
+        <input asp-for="Guests" class="form-control" type="number" min="1" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Creează</button>
+    <a asp-action="Index" class="btn btn-secondary">Înapoi</a>
+</form>

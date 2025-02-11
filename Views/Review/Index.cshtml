@@ -1,0 +1,28 @@
+﻿@{
+    var userNames = ViewBag.UserNames as Dictionary<string, string>;
+}
+
+<a asp-action="Create" class="btn btn-primary mb-3">Adaugă o recenzie</a>
+
+@foreach (var review in Model)
+{
+    <div class="card review-card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Rating: ⭐ @review.Rating</h5>
+            <p class="card-text">@review.Text</p>
+
+            @if (User.IsInRole("Admin") && userNames != null)
+            {
+                <p><strong>Utilizator:</strong> @(userNames.ContainsKey(review.IdUser) ? userNames[review.IdUser] : "Necunoscut")</p>
+            }
+
+            @if (User.IsInRole("Admin"))
+            {
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@review.IdReview" />
+                    <button type="submit" class="btn btn-danger">Șterge</button>
+                </form>
+            }
+        </div>
+    </div>
+}

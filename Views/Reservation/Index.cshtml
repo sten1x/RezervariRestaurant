@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RezervariRestaurant.Models.ReservationModel>
+
+@{
+    ViewData["Title"] = "Rezervările Mele";
+}
+
+<h2 class="mb-4">Rezervările Mele</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Adaugă o Rezervare</a>
+
+<div class="row">
+    @{
+        var userNames = ViewBag.UserNames as Dictionary<string, string>;
+    }
+
+    @foreach (var reservation in Model)
+    {
+        <div class="card reservation-card mb-3" data-status="@reservation.Status">
+            <div class="card-body">
+                <h5>Rezervare pentru @reservation.Guests persoane</h5>
+                <p><strong>Data:</strong> @reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm")</p>
+
+                @if (User.IsInRole("Admin") && userNames != null)
+                {
+                    <p><strong>Utilizator:</strong> @(userNames.ContainsKey(reservation.IdUser) ? userNames[reservation.IdUser] : "Necunoscut")</p>
+                }
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status-badge @(reservation.Status == "Pending" ? "status-pending" : "status-approved")">
+                        @reservation.Status
+                    </span>
+                </p>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <form asp-action="UpdateStatus" method="post" class="d-inline">
+                        <input type="hidden" name="reservationId" value="@reservation.IdReservation" />
+                        <button type="submit" class="btn btn-success">Aprobă</button>
+                    </form>
+
+                    <form asp-action="CancelReservation" method="post" class="d-inline">
+                        <input type="hidden" name="reservationId" value="@reservation.IdReservation" />
+                        <button type="submit" class="btn btn-warning">Anulează</button>
+                    </form>
+                }
+
+                <a asp-action="Edit" asp-route-id="@reservation.IdReservation" class="btn btn-primary">Editează</a>
+                <a asp-action="Delete" asp-route-id="@reservation.IdReservation" class="btn btn-danger">Șterge</a>
+            </div>
+        </div>
+    }
+
+</div>

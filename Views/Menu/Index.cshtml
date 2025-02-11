@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MenuItemModel>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Meniu";
+    var isAdmin = User.IsInRole("Admin"); 
+ }
+
+<h2>@ViewData["Title"]</h2>
+
+@if (isAdmin)
+{
+    <a asp-action="Create" class="btn btn-success">Adaugă Produs</a>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nume</th>
+            <th>Descriere</th>
+            <th>Preț</th>
+            @if (isAdmin)
+            {
+                <th>Acțiuni</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Price lei</td>
+                @if (isAdmin)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdMenuItem" class="btn btn-primary">Editează</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdMenuItem" class="btn btn-danger">Șterge</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center mb-4">
+    <a class="btn btn-success btn-lg" asp-controller="Reservation" asp-action="Create">
+        📅 Rezervă Acum
+    </a>
+</div>
